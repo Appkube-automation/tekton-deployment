@@ -1,0 +1,14 @@
+apiVersion: logging.banzaicloud.io/v1beta1
+kind: Flow
+metadata:
+  name: s3-flow
+spec:
+  filters:
+    - tag_normaliser: {}
+  match:
+    - select:
+        labels:
+          app.kubernetes.io/managed-by: tekton-pipelines
+          tekton.dev/memberOf: tasks
+  localOutputRefs:
+    - s3-tt-output
